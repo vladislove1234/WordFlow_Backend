@@ -1,0 +1,465 @@
+openapi: 3.0.3
+info:
+  title: VeeArc API
+  description: 'This service provides user management and CRUD operation for articles.'
+  contact:
+    email: pivtorak.vn4k@gmail.com
+  version: 0.1.0
+
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      summary: Register a user
+      description: ''
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+    get:
+      tags: 
+        - User
+      summary: Get a list of users
+      description: ''
+      operationId: getUsers
+      parameters:
+        - name: cursor
+          in: query
+          description: From which location in the list to continue pulling results from.
+          schema:
+            type: string
+            description: From which location in the list to continue pulling results from.
+            nullable: true
+        - name: limit
+          in: query
+          description: A limit on the number of objects to be returned. Default is 50.
+          schema:
+            type: integer
+            description: A limit on the number of objects to be returned. Default is 50.
+            format: int32
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPagedList'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /users/{userId}:
+    get:
+      tags:
+        - User
+      summary: Get user by user id
+      description: ''
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    put:
+      tags:
+        - User
+      summary: Update user by user id
+      description: ''
+      operationId: updateUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    delete:
+      tags:
+        - User
+      summary: Delete user by user id
+      description: ''
+      operationId: deleteUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /articles:
+    post:
+      tags:
+        - Article
+      summary: Create an article
+      description: ''
+      operationId: createArticle
+      requestBody:
+        description: Created article object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateArticleRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+    get:
+      tags: 
+        - Article
+      summary: Get a list of articles
+      description: ''
+      operationId: getArticles
+      parameters:
+        - name: cursor
+          in: query
+          description: From which location in the list to continue pulling results from.
+          schema:
+            type: string
+            description: From which location in the list to continue pulling results from.
+            nullable: true
+        - name: limit
+          in: query
+          description: A limit on the number of objects to be returned. Default is 50.
+          schema:
+            type: integer
+            description: A limit on the number of objects to be returned. Default is 50.
+            format: int32
+            nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticlePagedList'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /articles/{articleId}:
+    get:
+      tags:
+        - Article
+      summary: Get article by article id
+      description: ''
+      operationId: getArticleById
+      parameters:
+        - name: articleId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    put:
+      tags:
+        - Article
+      summary: Update article by article id
+      description: ''
+      operationId: updateaArticleById
+      parameters:
+        - name: articleId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update article object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateArticleRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    delete:
+      tags:
+        - Article
+      summary: Delete article by article id
+      description: ''
+      operationId: deleteArticleById
+      parameters:
+        - name: articleId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArticleResponse'          
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+components:
+  schemas:
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 86
+        username:
+          type: string
+          example: Vano4ok
+        firstName:
+          type: string
+          example: Ivan
+        lastName:
+          type: string
+          example: Pivtorak
+        email:
+          type: string
+          example: pivtorak.vn4k@gmail.com
+
+    CreateUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Vano4ok
+        firstName:
+          type: string
+          example: Ivan
+        lastName:
+          type: string
+          example: Pivtorak
+        email:
+          type: string
+          example: pivtorak.vn4k@gmail.com
+        password:
+          type: string
+          example: 'VeryStrongPassword'
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Vano4ok
+        firstName:
+          type: string
+          example: Ivan
+        lastName:
+          type: string
+          example: Pivtorak
+        email:
+          type: string
+          example: pivtorak.vn4k@gmail.com
+        password:
+          type: string
+          example: 'VeryStrongPassword'
+          
+    UserPagedList:
+      type: object
+      properties:
+        items: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/UserResponse'
+          nullable: true
+
+    ArticleState:
+      type: string
+      enum:
+        - new
+        - inReview
+        - confirm
+            
+    ArticleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 74
+        title:
+          type: string
+          example: Can I use .NET please?
+        text:
+          type: string
+          example: So, why .NET is better than python? Let's...
+        date:
+          type: string
+          format: date-time
+        userId:
+          type: integer
+          example: 86
+        state:
+          $ref: '#/components/schemas/ArticleState'
+
+    CreateArticleRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Can I use .NET please?
+        text:
+          type: string
+          example: So, why .NET is better than python? Let's...
+        userId:
+          type: integer
+          example: 86
+
+    UpdateArticleRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Can I use .NET please?
+        text:
+          type: string
+          example: So, why .NET is better than python? Let's...
+        userId:
+          type: integer
+          example: 86
+        state:
+          $ref: '#/components/schemas/ArticleState'
+          
+    ArticlePagedList:
+      type: object
+      properties:
+        items: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/ArticleResponse'
+          nullable: true
+
+    ErrorModel:
+      description: Detailed information about the error that occurred during the operation.
+      type: object
+      properties:
+        traceId:
+          description: Identifier of an operation.
+          type: string
+          nullable: true
+          readOnly: true
+        errors:
+          description: Collection of the errors that occurred during the operation.
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                description: Description of the error.
+                type: string
+                nullable: true
+                readOnly: true
+              source:
+                description: Source where the error occurred.
+                type: string
+                nullable: true
+                readOnly: true
