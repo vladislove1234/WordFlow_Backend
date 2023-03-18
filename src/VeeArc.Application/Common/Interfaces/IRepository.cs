@@ -4,7 +4,7 @@ namespace VeeArc.Application.Common.Interfaces;
 
 public interface IRepository<T> where T : BaseEntity
 {
-    void UpdateAsync(T entity);
+    void Update(T entity);
 
     Task AddAsync(T entity);
 

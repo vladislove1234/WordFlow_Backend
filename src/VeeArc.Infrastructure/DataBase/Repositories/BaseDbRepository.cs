@@ -18,7 +18,7 @@ public class BaseDbRepository<T> : IRepository<T> where T : BaseEntity
         DbSet = dbSet;
     }
 
-    public void UpdateAsync(T entity)
+    public void Update(T entity)
     {
         DbSet.Update(entity);
     }
