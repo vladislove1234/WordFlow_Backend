@@ -2,7 +2,7 @@ using VeeArc.Domain.Common;
 
 namespace VeeArc.Application.Common.Interfaces;
 
-public interface IRepository<T> where T : BaseEntity
+public interface IBaseRepository<T> where T : BaseEntity
 {
     void Update(T entity);
 
@@ -10,9 +10,11 @@ public interface IRepository<T> where T : BaseEntity
 
     Task AddRangeAsync(IEnumerable<T> entities);
 
-    Task<T> GetById(int id);
+    Task<T> GetByIdAsync(int id);
     
-    IQueryable<T> GetAllAsync();
+    IQueryable<T> GetAll();
+
+    void Remove(T entity);
 
     Task SaveAsync();
 }

@@ -6,7 +6,7 @@ using VeeArc.Infrastructure.Common.Interfaces;
 
 namespace VeeArc.Infrastructure.DataBase.Repositories;
 
-public class BaseDbRepository<T> : IRepository<T> where T : BaseEntity
+public abstract class BaseDbRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
     private readonly IApplicationDbContext _dbContext;
     
@@ -33,23 +33,23 @@ public class BaseDbRepository<T> : IRepository<T> where T : BaseEntity
         await DbSet.AddRangeAsync(entities);
     }
 
-    public async Task<T> GetById(int id)
+    public virtual async Task<T> GetByIdAsync(int id)
     {
-        return await IncludeProperties(DbSet).FirstAsync(entity => entity.Id == id);
+        return await DbSet.FirstAsync(entity => entity.Id == id);
     }
 
-    public IQueryable<T> GetAllAsync()
+    public virtual IQueryable<T> GetAll()
     {
-        return IncludeProperties(DbSet);
+        return DbSet;
     }
 
+    public void Remove(T entity)
+    {
+        DbSet.Remove(entity);
+    }
+    
     public async Task SaveAsync()
     {
         await _dbContext.SaveAsync();
-    }
-
-    protected virtual IQueryable<T> IncludeProperties(DbSet<T> dbSet)
-    {
-        return dbSet.AsQueryable();
     }
 }

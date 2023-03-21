@@ -1,17 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using VeeArc.Application.Common.Interfaces;
 using VeeArc.Domain.Entities;
 using VeeArc.Infrastructure.Common.Interfaces;
 
 namespace VeeArc.Infrastructure.DataBase.Repositories;
 
-public class UserRepository : BaseDbRepository<User>
+public class UserRepository : BaseDbRepository<User>, IUserRepository
 {
     public UserRepository(IApplicationDbContext dbContext) : base(dbContext, dbContext.Users)
     {
     }
 
-    protected override IQueryable<User> IncludeProperties(DbSet<User> dbSet)
+    public override Task<User> GetByIdAsync(int id)
     {
-        return dbSet.Include(user => user.Roles).AsQueryable();
+        return DbSet.Include(user => user.Roles).FirstAsync(user => user.Id == id);
+    }
+
+    public override IQueryable<User> GetAll()
+    {
+        return DbSet.Include(user => user.Roles);
     }
 }

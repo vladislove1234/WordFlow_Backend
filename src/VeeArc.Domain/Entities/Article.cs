@@ -11,5 +11,7 @@ public class Article : BaseAuditableEntity
     
     public ArticleState State { get; set; }
     
-    public int AuthorId { get; set; }
+    public int UserId { get; set; }
+    
+    public User User { get; set; }
 }

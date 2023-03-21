@@ -19,7 +19,14 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
 
         base.OnConfiguring(optionsBuilder);
     }
-    
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Article>()
+            .HasOne(article => article.User)
+            .WithMany(user => user.Articles);
+    }
+
     public async Task SaveAsync()
     {
         await SaveChangesAsync();

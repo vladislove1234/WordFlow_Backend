@@ -15,4 +15,6 @@ public class User : BaseAuditableEntity
     public string Password { get; set; }
 
     public List<Role> Roles { get; set; }
+    
+    public List<Article> Articles { get; set; }
 }
