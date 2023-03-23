@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using VeeArc.Application.Common.Interfaces;
 using VeeArc.Domain.Common;
 using VeeArc.Infrastructure.Common.Interfaces;
@@ -9,10 +8,10 @@ namespace VeeArc.Infrastructure.DataBase.Repositories;
 public abstract class BaseDbRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
     private readonly IApplicationDbContext _dbContext;
-    
+
     protected readonly DbSet<T> DbSet;
 
-    public BaseDbRepository(IApplicationDbContext dbContext, DbSet<T> dbSet)
+    protected BaseDbRepository(IApplicationDbContext dbContext, DbSet<T> dbSet)
     {
         _dbContext = dbContext;
         DbSet = dbSet;
@@ -47,7 +46,7 @@ public abstract class BaseDbRepository<T> : IBaseRepository<T> where T : BaseEnt
     {
         DbSet.Remove(entity);
     }
-    
+
     public async Task SaveAsync()
     {
         await _dbContext.SaveAsync();

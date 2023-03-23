@@ -13,7 +13,9 @@ public class UserRepository : BaseDbRepository<User>, IUserRepository
 
     public override Task<User> GetByIdAsync(int id)
     {
-        return DbSet.Include(user => user.Roles).FirstAsync(user => user.Id == id);
+        return DbSet.Include(user => user.Roles)
+                    .Include(user => user.Articles)
+                    .FirstAsync(user => user.Id == id);
     }
 
     public override IQueryable<User> GetAll()

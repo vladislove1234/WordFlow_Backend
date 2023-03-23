@@ -11,7 +11,7 @@ public interface IBaseRepository<T> where T : BaseEntity
     Task AddRangeAsync(IEnumerable<T> entities);
 
     Task<T> GetByIdAsync(int id);
-    
+
     IQueryable<T> GetAll();
 
     void Remove(T entity);

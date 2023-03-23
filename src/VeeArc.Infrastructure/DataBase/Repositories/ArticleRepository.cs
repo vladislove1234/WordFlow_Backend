@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using VeeArc.Application.Common.Interfaces;
 using VeeArc.Domain.Entities;
 using VeeArc.Infrastructure.Common.Interfaces;
