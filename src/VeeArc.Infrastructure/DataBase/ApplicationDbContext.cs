@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VeeArc.Domain.Entities;
 using VeeArc.Infrastructure.Common.Interfaces;
-using VeeArc.Infrastructure.DataBase.Interceptors;
 
 namespace VeeArc.Infrastructure.DataBase;
 
@@ -17,6 +16,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         await SaveChangesAsync();
     }
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : base(options)
+    { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

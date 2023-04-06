@@ -12,13 +12,17 @@ public static class DbConfigurationExtension
     {
         if (configuration.GetValue<bool>("UseInMemory"))
         {
-            return services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("CleanArchitectureDb")
                     .AddInterceptors(new AuditableEntitySaveChangesInterceptor()));
+
+            return services;
         }
-        
-        return services.AddDbContext<ApplicationDbContext>(options =>
+
+        services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                 .AddInterceptors(new AuditableEntitySaveChangesInterceptor()));
+
+        return services;
     }
 }
