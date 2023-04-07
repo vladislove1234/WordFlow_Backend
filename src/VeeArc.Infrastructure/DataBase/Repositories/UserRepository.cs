@@ -11,11 +11,11 @@ public class UserRepository : BaseDbRepository<User>, IUserRepository
     {
     }
 
-    public override Task<User> GetByIdAsync(int id)
+    public override Task<User?> GetByIdAsync(int id)
     {
         return DbSet.Include(user => user.Roles)
                     .Include(user => user.Articles)
-                    .FirstAsync(user => user.Id == id);
+                    .FirstOrDefaultAsync(user => user.Id == id);
     }
 
     public override IQueryable<User> GetAll()

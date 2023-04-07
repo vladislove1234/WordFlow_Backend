@@ -1,4 +1,5 @@
 using VeeArc.Domain.Common;
+using VeeArc.Domain.Entities;
 
 namespace VeeArc.Application.Common.Interfaces;
 
@@ -10,7 +11,7 @@ public interface IBaseRepository<T> where T : BaseEntity
 
     Task AddRangeAsync(IEnumerable<T> entities);
 
-    Task<T> GetByIdAsync(int id);
+    Task<T?> GetByIdAsync(int id);
 
     IQueryable<T> GetAll();
 
