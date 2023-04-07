@@ -32,9 +32,9 @@ public abstract class BaseDbRepository<T> : IBaseRepository<T> where T : BaseEnt
         await DbSet.AddRangeAsync(entities);
     }
 
-    public virtual async Task<T> GetByIdAsync(int id)
+    public virtual async Task<T?> GetByIdAsync(int id)
     {
-        return await DbSet.FirstAsync(entity => entity.Id == id);
+        return await DbSet.FirstOrDefaultAsync(entity => entity.Id == id);
     }
 
     public virtual IQueryable<T> GetAll()

@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\VeeArc.Application\VeeArc.Application.csproj"/>
-        <ProjectReference Include="..\VeeArc.Infrastructure\VeeArc.Infrastructure.csproj"/>
+        <ProjectReference Include="..\VeeArc.Application\VeeArc.Application.csproj" />
+        <ProjectReference Include="..\VeeArc.Infrastructure\VeeArc.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

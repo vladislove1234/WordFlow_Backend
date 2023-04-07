@@ -10,7 +10,7 @@ public interface IBaseRepository<T> where T : BaseEntity
 
     Task AddRangeAsync(IEnumerable<T> entities);
 
-    Task<T> GetByIdAsync(int id);
+    Task<T?> GetByIdAsync(int id);
 
     IQueryable<T> GetAll();
 

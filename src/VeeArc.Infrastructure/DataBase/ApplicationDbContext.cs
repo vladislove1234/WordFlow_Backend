@@ -6,11 +6,11 @@ namespace VeeArc.Infrastructure.DataBase;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-    public DbSet<Article> Articles { get; }
+    public DbSet<Article> Articles { get; set; }
 
-    public DbSet<User> Users { get; }
+    public DbSet<User> Users { get; set; }
 
-    public DbSet<Role> Roles { get; }
+    public DbSet<Role> Roles { get; set; }
 
     public async Task SaveAsync()
     {
